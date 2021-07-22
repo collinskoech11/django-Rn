@@ -25,6 +25,20 @@ class ArticleList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+class ArticleDetails(APIView):
+
+    def get_object(self, id):
+        try: 
+           return Article.objects.get(id)
+
+        except:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+    def get(self, request, id):
+        articles = Article.objects.all()
+        serializer = ArticleSerializer(articles, many=True)
+        return Response(serializer.data)
+
 
 '''
 # Create your views here.
