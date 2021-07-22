@@ -39,7 +39,7 @@ def article_details(request, pk):
 
     elif request.method == 'PUT':
         data = JSONParser().parse(request)
-        serializer = ArticleSerializer(data=data)
+        serializer = ArticleSerializer(article, data=data)
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data, status=201)
