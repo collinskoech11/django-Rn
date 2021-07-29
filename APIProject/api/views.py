@@ -14,6 +14,7 @@ from django.shortcuts import get_object_or_404
 
 
 class ArticleViewSet(viewsets.ViewSet):
+
     def list(self, request):
         articles = Article.objects.all()
         serializer = ArticleSerializer(articles, many=True)
@@ -41,6 +42,12 @@ class ArticleViewSet(viewsets.ViewSet):
             serializer.save()
             return Response(serializer.data, status.HTTP_201_CREATED)
         return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
+
+    def destroy(self, request, pk=None):
+        article= Article.objects.get(pk=pk)
+        article.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
 
 
 '''
