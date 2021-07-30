@@ -13,7 +13,7 @@ from rest_framework import viewsets
 from django.shortcuts import get_object_or_404
 
 class ArticleViewSet(viewsets.GenericViewSet, mixins.ListModelMixin,
-                    mixins.CreateModelMixin):
+                    mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixins.UpdateModelMixin):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
 
