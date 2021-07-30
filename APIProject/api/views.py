@@ -12,9 +12,14 @@ from rest_framework import mixins
 from rest_framework import viewsets
 from django.shortcuts import get_object_or_404
 
+class ArticleViewSet(viewsets.GenericViewSet, mixins.ListModelMixin,
+                    mixins.CreateModelMixin):
+    queryset = Article.objects.all()
+    serializer_class = ArticleSerializer
 
+'''
 class ArticleViewSet(viewsets.ViewSet):
-
+    
     def list(self, request):
         articles = Article.objects.all()
         serializer = ArticleSerializer(articles, many=True)
@@ -37,7 +42,7 @@ class ArticleViewSet(viewsets.ViewSet):
         article= Article.objects.get(pk=pk)
 
         
-        serializer =  ArticleSerializer(data=request.data)
+        serializer =  ArticleSerializer(article, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status.HTTP_201_CREATED)
@@ -48,7 +53,7 @@ class ArticleViewSet(viewsets.ViewSet):
         article.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-
+'''
 
 '''
 
